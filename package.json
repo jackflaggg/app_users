@@ -1,7 +1,7 @@
 {
   "name": "app_users",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "license": "MIT",
   "dependencies": {
     "@types/cors": "^2.8.17",
@@ -18,6 +18,6 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "dev": "yarn nodemon --inspect dist/index.js"
+    "dev": "yarn nodemon --inspect dist/app.js"
   }
 }
