@@ -1,5 +1,5 @@
 import {LoggerService} from "../logger/logger.service";
-import { Router } from "express";
+import { Router, Response } from "express";
 import {IControllerRoute} from "./route.interface";
 
 export abstract class BaseController {
@@ -13,10 +13,22 @@ export abstract class BaseController {
         return this._router;
     }
 
+    public ok<T>(res: Response, msg: T){
+        return this.send<T>(res,200, msg)
+    }
+    public created(res: Response) {
+        return res.sendStatus(201);
+    }
+
+    public send<T>(res: Response, code: number, msg: T) {
+        return res.status(code).json(msg);
+    }
+
     protected bindRoutes(routes: IControllerRoute[]){
         for (const route of routes) {
             this.logger.log(`[${route.method}] ${route.path}`);
-            this.router[route.method](route.path, route.func);
+            const handler = route.func.bind(this);
+            this.router[route.method](route.path, handler);
         }
     }
 
