@@ -1,5 +1,6 @@
 import {LoggerService} from "../logger/logger.service";
 import { Router } from "express";
+import {IControllerRoute} from "./route.interface";
 
 export abstract class BaseController {
     private readonly _router: Router;
@@ -10,6 +11,13 @@ export abstract class BaseController {
 
     get router() {
         return this._router;
+    }
+
+    protected bindRoutes(routes: IControllerRoute[]){
+        for (const route of routes) {
+            this.logger.log(`[${route.method}] ${route.path}`);
+            this.router[route.method](route.path, route.func);
+        }
     }
 
 }
