@@ -4,8 +4,8 @@ import {Server} from "http";
 
 export class App {
     private app: Express;
-    private server: Server
-    private port: number;
+    private server: Server | undefined;
+    public port: number;
 
     constructor(app: Express = express(), port: number = 8000) {
         this.app = app;
@@ -17,7 +17,10 @@ export class App {
     }
     public async init() {
         this.useRoutes();
-        this.server = this.app.listen(this.port);
-        console.log('Server is running on port: ' + this.port)
+        this.server = this.app.listen(this.port, () => {
+            console.log('Server is running on port: ' + this.port)
+        });
+
     }
 }
+
