@@ -9,7 +9,7 @@ export abstract class BaseController {
         this._router = Router();
     }
 
-    get router() {
+    public get router() {
         return this._router;
     }
 
