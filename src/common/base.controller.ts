@@ -17,11 +17,14 @@ export abstract class BaseController {
         return this.send<T>(res,200, msg)
     }
     public created(res: Response) {
-        return res.sendStatus(201);
+        return res
+            .sendStatus(201);
     }
 
     public send<T>(res: Response, code: number, msg: T) {
-        return res.status(code).json(msg);
+        return res
+            .status(code)
+            .json(msg);
     }
 
     protected bindRoutes(routes: IControllerRoute[]){
