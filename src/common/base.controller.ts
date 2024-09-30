@@ -16,6 +16,7 @@ export abstract class BaseController {
     public ok<T>(res: Response, msg: T){
         return this.send<T>(res,200, msg)
     }
+
     public created(res: Response) {
         return res
             .sendStatus(201);
