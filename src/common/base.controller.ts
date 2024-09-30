@@ -28,6 +28,8 @@ export abstract class BaseController {
             .json(msg);
     }
 
+    // связывает маршруты с соответствующими обработчиками,
+    // используя bind(this) для сохранения контекста
     protected bindRoutes(routes: IControllerRoute[]){
         for (const route of routes) {
             this.logger.log(`[${route.method}] ${route.path}`);
