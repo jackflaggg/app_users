@@ -1,8 +1,22 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response, NextFunction, Router} from "express";
 
-export const userRouter = async (req: Request, res: Response) => {
-    const users = [1, 2 , 4];
-    res.
-        status(200).json(users);
+export const userRouter = Router();
+
+userRouter.use((req: Request, res: Response, next: NextFunction) => {
+    console.log('обработчик users');
+    next()
+});
+
+userRouter.post("/login", (req: Request, res: Response) => {
+    res
+        .status(201)
+        .send('login')
     return
-}
+})
+
+userRouter.post("/register", (req: Request, res: Response) => {
+    res
+        .status(201)
+        .send('register')
+    return
+})
