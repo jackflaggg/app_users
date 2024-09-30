@@ -19,13 +19,13 @@ export class App {
     useRoutes() {
         this.app.use('/users', userRouter)
     }
+
     public async init() {
         this.useRoutes();
         this.server = this.app.listen(this.port, () => {
             console.log('Server is running on port: ' + this.port)
         });
         this.logger.log()
-
     }
 }
 
