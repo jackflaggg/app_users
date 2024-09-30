@@ -1,23 +1,26 @@
 import express, {Express} from 'express'
-import {userRouter} from "./users/users";
 import {Server} from "http";
 import {LoggerService} from "./logger/logger.service";
+import {UserController} from "./users/user.controller";
 
 export class App {
     private app: Express;
     private server: Server | undefined;
     public port: number;
     public logger: LoggerService
+    public userController: UserController;
 
     // если мы хотим передавать в конструктор всегда логгер!
-    constructor(logger: LoggerService) {
+    constructor(logger: LoggerService, userController: UserController) {
         this.app = express();
         this.port = 8000;
         this.logger = logger;
+        this.userController = userController
     }
 
     useRoutes() {
-        this.app.use('/users', userRouter)
+        // можем обращаться к роутеру, потому что мы имеем через гет доступ к роутеру
+        this.app.use('/users', this.userController.router)
     }
 
     public async init() {
