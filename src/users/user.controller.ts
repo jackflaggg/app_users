@@ -1,6 +1,7 @@
 import {BaseController} from "../common/base.controller";
 import {LoggerService} from "../logger/logger.service";
 import {Request, Response, NextFunction} from "express";
+import {HTTPError} from "../errors/http-error.class";
 
 export class UserController extends BaseController{
     // вызвать bindRoutes
@@ -16,7 +17,7 @@ export class UserController extends BaseController{
     }
 
     login(req: Request, res: Response, next: NextFunction){
-        this.ok(res, 'login')
+        next(new HTTPError(401, 'Авторизация'))
     }
 
     register(req: Request, res: Response, next: NextFunction){
