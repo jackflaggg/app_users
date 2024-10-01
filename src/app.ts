@@ -3,17 +3,18 @@ import {Server} from "http";
 import {LoggerService} from "./logger/logger.service";
 import {UserController} from "./users/user.controller";
 import {ExceptionFilter} from "./errors/exception.filter";
+import {ILogger} from "./logger/logger.interface";
 
 export class App {
     private app: Express;
     private server: Server | undefined;
     public port: number;
-    public logger: LoggerService
+    public logger: ILogger
     public userController: UserController;
     public exceptionFilter: ExceptionFilter;
 
     // если мы хотим передавать в конструктор всегда логгер!
-    constructor(logger: LoggerService, userController: UserController, exceptionFilter: ExceptionFilter) {
+    constructor(logger: ILogger, userController: UserController, exceptionFilter: ExceptionFilter) {
         this.app = express();
         this.port = 8000;
         this.logger = logger;
