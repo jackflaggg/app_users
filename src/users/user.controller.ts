@@ -5,9 +5,12 @@ import {ILogger} from "../logger/logger.interface";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
 import 'reflect-metadata'
+import {IUserController} from "./user.interface";
+import {UserLoginDto} from "./dto/user-login.dto";
+import {UserRegisterDto} from "./dto/user-register.dto";
 
 @injectable()
-export class UserController extends BaseController{
+export class UserController extends BaseController implements IUserController {
     // вызвать bindRoutes
     // туда прибиндить то, что сейчас находится в логин и регистре то, что находится
     // вызвать супер и добавить в апп
@@ -20,11 +23,13 @@ export class UserController extends BaseController{
         ])
     }
 
-    login(req: Request, res: Response, next: NextFunction){
+    login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction){
+        console.log(req.body);
         next(new HTTPError(401, 'Авторизация'))
     }
 
-    register(req: Request, res: Response, next: NextFunction){
+    register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction){
+        console.log(req.body);
         this.ok(res, 'register')
     }
 
