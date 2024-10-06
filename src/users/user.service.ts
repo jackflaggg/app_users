@@ -4,7 +4,7 @@ import {User} from "./user.entity";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {injectable} from "inversify";
 
-injectable()
+@injectable()
 export class UserService implements UserServiceInterface {
     async createUser(dto: UserRegisterDto): Promise<User | null>{
         const user = new User(dto.email, dto.name);
