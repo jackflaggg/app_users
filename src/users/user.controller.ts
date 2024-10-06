@@ -9,6 +9,7 @@ import {IUserController} from "./user.interface";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {UserRegisterDto} from "./dto/user-register.dto";
 import {User} from "./user.entity";
+import {UserServiceInterface} from "./user.service.interface";
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -16,7 +17,9 @@ export class UserController extends BaseController implements IUserController {
     // туда прибиндить то, что сейчас находится в логин и регистре то, что находится
     // вызвать супер и добавить в апп
 
-    constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+    constructor(
+        @inject(TYPES.ILogger) private loggerService: ILogger,
+        @inject(TYPES.UserService) private userService: UserServiceInterface) {
         super(loggerService);
         this.bindRoutes([
             { path: '/register', method: 'post', func: this.register },
@@ -32,8 +35,11 @@ export class UserController extends BaseController implements IUserController {
     async register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction){
         const newUser = new User(req.body.email, req.body.name);
         try {
-            const awaitedPass = await newUser.setPassword(req.body.password);
-            this.ok(res, 'register')
+            const result = await this.userService.createUser(req.body)
+            if (!result){
+                return next(new HTTPError(422, 'Такой пользователь есть'));
+            }
+            this.ok(res, result)
         } catch (e){
             console.error(e);
             next(new HTTPError(500, 'Ошибка при регистрации'));
