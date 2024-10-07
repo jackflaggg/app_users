@@ -18,10 +18,10 @@ export class ConfigService implements IConfigService {
             this.config = result.parsed as DotenvParseOutput;
         }
     }
-    get<T extends number | string>(key: string): T {
+    get(key: string): string {
         if (!this.config) {
             throw new Error('Конфигурация не инициализирована!');
         }
-        return this.config[key] as T;
+        return this.config[key];
     }
 }
