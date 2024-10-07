@@ -19,7 +19,7 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
     bind<IUserController>(TYPES.UserController).to(UserController);
     bind<IUserService>(TYPES.UserService).to(UserService);
-    bind<IConfigService>(TYPES.ConfigService).to(ConfigService);
+    bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
     bind<App>(TYPES.Application).to(App);
 });
 
