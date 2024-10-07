@@ -1,4 +1,3 @@
-
 export const TYPES = {
     Application: Symbol.for("Application"),
 
@@ -17,4 +16,7 @@ export const TYPES = {
     HTTPError: Symbol.for("HTTPError"),
 
     IControllerRoute: Symbol.for("IControllerRoute"),
+
+    ConfigService: Symbol.for("ConfigService"),
+    IConfigService: Symbol.for("IConfigService"),
 }
