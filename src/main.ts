@@ -10,6 +10,7 @@ import {UserService} from "./users/user.service";
 import {UserServiceInterface} from "./users/user.service.interface";
 import {IUserController} from "./users/user.interface";
 
+// мусорка всех зависимостей
 export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
     bind<ILogger>(TYPES.ILogger).to(LoggerService);
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
