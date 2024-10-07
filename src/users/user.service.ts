@@ -11,6 +11,7 @@ export class UserService implements UserService {
     async createUser(dto: UserRegisterDto): Promise<User | null>{
         const user = new User(dto.email, dto.name);
         await user.setPassword(dto.password);
+
         if (!user){
             return null;
         }
