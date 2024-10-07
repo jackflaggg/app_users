@@ -3,7 +3,7 @@ export const TYPES = {
     Application: Symbol.for("Application"),
 
     LoggerService: Symbol.for("LoggerService"),
-    ILogger: Symbol.for("ILogger"),
+    ILoggerService: Symbol.for("ILoggerService"),
 
     UserService: Symbol.for("UserService"),
     UserServiceInterface: Symbol.for("UserServiceInterface"),

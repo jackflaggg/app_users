@@ -1,7 +1,7 @@
 import {BaseController} from "../common/base.controller";
 import {Request, Response, NextFunction} from "express";
 import {HTTPError} from "../errors/http-error.class";
-import {ILogger} from "../logger/logger.interface";
+import {ILoggerService} from "../logger/logger.interface";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../types";
 import 'reflect-metadata'
@@ -9,7 +9,7 @@ import {IUserController} from "./user.interface";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {UserRegisterDto} from "./dto/user-register.dto";
 import {User} from "./user.entity";
-import {UserServiceInterface} from "./user.service.interface";
+import {IUserService} from "./user.service.interface";
 import {ValidateMiddleware} from "../common/validate.middleware";
 
 @injectable()
@@ -19,8 +19,8 @@ export class UserController extends BaseController implements IUserController {
     // вызвать супер и добавить в апп
 
     constructor(
-        @inject(TYPES.ILogger) private loggerService: ILogger,
-        @inject(TYPES.UserService) private userService: UserServiceInterface) {
+        @inject(TYPES.ILoggerService) private loggerService: ILoggerService,
+        @inject(TYPES.UserService) private userService: IUserService) {
         super(loggerService);
         this.bindRoutes([
             { path: '/register', method: 'post', func: this.register, middlewares: [new ValidateMiddleware(UserRegisterDto)] },

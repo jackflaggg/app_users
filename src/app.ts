@@ -2,11 +2,11 @@ import express, {Express} from 'express'
 import {Server} from "http";
 import {UserController} from "./users/user.controller";
 import {ExceptionFilter} from "./errors/exception.filter";
-import {ILogger} from "./logger/logger.interface";
 import {inject, injectable} from "inversify";
 import {TYPES} from "./types";
 import { json } from "body-parser"
 import 'reflect-metadata'
+import {ILoggerService} from "./logger/logger.interface";
 
 @injectable()
 export class App {
@@ -14,9 +14,10 @@ export class App {
     private server: Server | undefined;
     public port: number;
 
-    // если мы хотим передавать в конструктор всегда логгер!
+    // логгер (и другие зависимости) инжектируются,
+    // чтобы обеспечить их доступность в экземпляре класса App
     constructor(
-        @inject(TYPES.ILogger) private logger: ILogger,
+        @inject(TYPES.ILoggerService) private logger: ILoggerService,
         @inject(TYPES.UserController) private userController: UserController,
         @inject(TYPES.ExceptionFilter) private exceptionFilter: ExceptionFilter) {
         this.app = express();
@@ -27,7 +28,8 @@ export class App {
         this.app.use(json());
     }
     useRoutes() {
-        // можем обращаться к роутеру, потому что мы имеем через геттер абстрактного класса доступ к роутеру
+        // Используем роутер пользователя,
+        // инжектированный через зависимость, для обработки маршрутов на /users".
         this.app.use('/users', this.userController.router)
     }
     useExceptionFilters(){
