@@ -9,6 +9,8 @@ import {IExceptionFilter} from "./errors/exception.filter.interface";
 import {UserService} from "./users/user.service";
 import {IUserService} from "./users/user.service.interface";
 import {IUserController} from "./users/user.interface";
+import {IConfigService} from "./config/config.service.interface";
+import {ConfigService} from "./config/config.service";
 
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
@@ -17,6 +19,7 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
     bind<IUserController>(TYPES.UserController).to(UserController);
     bind<IUserService>(TYPES.UserService).to(UserService);
+    bind<IConfigService>(TYPES.ConfigService).to(ConfigService);
     bind<App>(TYPES.Application).to(App);
 });
 
