@@ -10,7 +10,8 @@ export class UserService implements UserService {
     constructor(@inject(TYPES.ConfigService) private configService: IConfigService) {}
     async createUser(dto: UserRegisterDto): Promise<User | null>{
         const user = new User(dto.email, dto.name);
-        await user.setPassword(dto.password);
+        const salt = this.configService.get<number>('SALT')
+        await user.setPassword(dto.password, salt);
 
         if (!user){
             return null;
