@@ -15,12 +15,12 @@ import {ConfigService} from "./config/config.service";
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
 export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
-    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService);
-    bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
-    bind<IUserController>(TYPES.UserController).to(UserController);
-    bind<IUserService>(TYPES.UserService).to(UserService);
+    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
+    bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
+    bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
+    bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
     bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
-    bind<App>(TYPES.Application).to(App);
+    bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
 function bootstrap() {
