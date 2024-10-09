@@ -24,7 +24,7 @@ export class UsersRepository implements IUsersRepository {
             where: {
                 email: emailUser
             }
-        })
+        });
         if (!findUser) return null;
         return userModelMapper(findUser);
     };
@@ -33,13 +33,13 @@ export class UsersRepository implements IUsersRepository {
             where: {
                 id: userId
             }
-        })
+        });
         if (!findUser) return false;
         const deleteUser = await this.prismaService.client.userModel.delete({
             where: {
                 id: userId
             },
-        })
-        return true
+        });
+        return true;
     };
 }
