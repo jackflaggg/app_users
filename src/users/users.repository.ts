@@ -4,23 +4,42 @@ import {UserModel} from "@prisma/client";
 import {TYPES} from "../types";
 import {inject} from "inversify";
 import {PrismaService} from "../common/db/prisma.service";
+import {userModelMapper} from "../mapper/userModel.mapper";
 
 export class UsersRepository implements IUsersRepository {
     constructor(@inject(TYPES.PrismaService) private prismaService: PrismaService) {}
     async create(user: User) : Promise<UserModel>{
         const {email, password, name} = user;
-        return this.prismaService.client.userModel.create({
+        const createUser = await this.prismaService.client.userModel.create({
             data: {
                 email,
                 password,
                 name
             },
         });
+        return userModelMapper(createUser);
     };
     async find(emailUser: string) : Promise<UserModel | null>{
-
+        const findUser = await this.prismaService.client.userModel.findFirst({
+            where: {
+                email: emailUser
+            }
+        })
+        if (!findUser) return null;
+        return userModelMapper(findUser);
     };
-    async delete(userId: string) : Promise<void>{
-
+    async delete(userId: number) : Promise<boolean>{
+        const findUser = await this.prismaService.client.userModel.findFirst({
+            where: {
+                id: userId
+            }
+        })
+        if (!findUser) return false;
+        const deleteUser = await this.prismaService.client.userModel.delete({
+            where: {
+                id: userId
+            },
+        })
+        return true
     };
 }
