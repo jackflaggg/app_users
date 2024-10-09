@@ -32,6 +32,7 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "dev": "yarn nodemon --inspect dist/main.js"
+    "dev": "yarn nodemon --inspect dist/main.js",
+    "generate": "prisma generate"
   }
 }
