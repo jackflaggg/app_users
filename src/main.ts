@@ -12,6 +12,8 @@ import {IUserController} from "./users/user.interface";
 import {IConfigService} from "./config/config.service.interface";
 import {ConfigService} from "./config/config.service";
 import {PrismaService} from "./common/db/prisma.service";
+import {UsersRepository} from "./users/users.repository";
+import {IUsersRepository} from "./users/users.repository.interface";
 
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
@@ -22,6 +24,7 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
     bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
     bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
     bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+    bind<IUsersRepository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope();
     bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 

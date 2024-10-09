@@ -40,7 +40,7 @@ export class UserController extends BaseController implements IUserController {
             if (!result){
                 return next(new HTTPError(422, 'Такой пользователь есть'));
             }
-            this.ok(res, { email: result.email })
+            this.ok(res, { email: result.email, id: result.id })
         } catch (e){
             console.error(e);
             next(new HTTPError(500, 'Ошибка при регистрации'));
