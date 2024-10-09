@@ -37,7 +37,7 @@ export class UsersRepository implements IUsersRepository {
         if (!findUser) return false;
         const deleteUser = await this.prismaService.client.userModel.delete({
             where: {
-                id: userId
+                id: findUser.id
             },
         });
         return true;
