@@ -11,7 +11,7 @@ import {IUserService} from "./users/user.service.interface";
 import {IUserController} from "./users/user.interface";
 import {IConfigService} from "./config/config.service.interface";
 import {ConfigService} from "./config/config.service";
-// import {PrismaService} from "./common/db/prisma.service";
+import {PrismaService} from "./common/db/prisma.service";
 
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
@@ -28,7 +28,7 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
 function bootstrap() {
     const exampleAppContainer = new Container();
     // прокидываем все зависимости
-
+    exampleAppContainer.load(appContainers);
     const app = exampleAppContainer.get<App>(TYPES.Application);
     app.init();
     return { exampleAppContainer, app }
