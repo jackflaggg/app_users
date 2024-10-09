@@ -29,8 +29,19 @@ export class UserController extends BaseController implements IUserController {
     }
 
     login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction){
-        console.log(req.body);
-        next(new HTTPError(401, 'Авторизация'))
+        try {
+            const result = await this.userService.validateUser(req.body);
+            if(!result){
+                return next(new HTTPError(422, 'Такого пользователя нет'));
+            }
+            this.ok(res, { result: result })
+        } catch (e: unknown){
+            if (e instanceof Error) {
+                console.error(e);
+                next(new HTTPError(500, 'Ошибка при логинизации'));
+            }
+            next(new HTTPError(401, 'Логинизация'))
+        }
     }
 
     async register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction){
