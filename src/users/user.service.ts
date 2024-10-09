@@ -30,6 +30,6 @@ export class UserService implements UserService {
             return false;
         }
         const newUser = new User(existingUser.email, existingUser.name, existingUser.password);
-        return true;
+        return await newUser.comparePassword(dto.password);
     };
 }
