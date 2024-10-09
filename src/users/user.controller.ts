@@ -34,7 +34,7 @@ export class UserController extends BaseController implements IUserController {
             if(!result){
                 return next(new HTTPError(422, 'Такого пользователя нет'));
             }
-            this.ok(res, { result: result })
+            this.ok(res, { resultBoolean: result })
         } catch (e: unknown){
             if (e instanceof Error) {
                 console.error(e);
