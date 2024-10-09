@@ -1,10 +1,10 @@
 import {hash} from "bcrypt";
 
 export class User {
-    private _password: string | undefined;
 
     constructor(private readonly _email: string,
-                private readonly _name: string,) {}
+                private readonly _name: string,
+                private _password?: string) {}
 
     get email(): string{
         return this._email;
