@@ -26,10 +26,13 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
 });
 
 function bootstrap() {
+    // создаем контейнер
     const exampleAppContainer = new Container();
     // прокидываем все зависимости
     exampleAppContainer.load(appContainers);
+    // получаем экземпляр приложения
     const app = exampleAppContainer.get<App>(TYPES.Application);
+    // инициализируем приложение
     app.init();
     return { exampleAppContainer, app }
 }
