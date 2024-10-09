@@ -28,7 +28,7 @@ export class UserController extends BaseController implements IUserController {
         ])
     }
 
-    login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction){
+    async login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction){
         try {
             const result = await this.userService.validateUser(req.body);
             if(!result){
