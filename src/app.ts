@@ -8,7 +8,9 @@ import {ILoggerService} from "./logger/logger.interface";
 import {IConfigService} from "./config/config.service.interface";
 import {IExceptionFilter} from "./errors/exception.filter.interface";
 import {UserController} from "./users/user.controller";
-import {PrismaService} from "./common/db/prisma.service";
+import {LoggerService} from "./logger/logger.service";
+// import {PrismaService} from "./common/db/prisma.service";
+// import {exampleAppContainer} from "./main";
 
 @injectable()
 export class App {
@@ -19,11 +21,11 @@ export class App {
     // логгер (и другие зависимости) инжектируются,
     // чтобы обеспечить их доступность в экземпляре класса App
     constructor(
-        @inject(TYPES.ILoggerService) private logger: ILoggerService,
+        @inject(TYPES.LoggerService) private logger: ILoggerService,
         @inject(TYPES.UserController) private userController: UserController,
         @inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
-        @inject(TYPES.ConfigService) private configService: IConfigService,
-        @inject(TYPES.PrismaService) private prismaService: PrismaService) {
+        //@inject(TYPES.PrismaService) private prismaService: PrismaService,
+        @inject(TYPES.ConfigService) private configService: IConfigService,) {
         this.app = express();
         this.port = 8000;
     }
@@ -43,7 +45,7 @@ export class App {
         this.useMiddleware();
         this.useRoutes();
         this.useExceptionFilters();
-        const repositoryPrisma = await this.prismaService.connect();
+        //await this.prismaService.connect();
         this.server = this.app.listen(this.port, () => {
             console.log('Server is running on port: ' + this.port)
         });

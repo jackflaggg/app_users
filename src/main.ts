@@ -11,16 +11,16 @@ import {IUserService} from "./users/user.service.interface";
 import {IUserController} from "./users/user.interface";
 import {IConfigService} from "./config/config.service.interface";
 import {ConfigService} from "./config/config.service";
-import {PrismaService} from "./common/db/prisma.service";
+// import {PrismaService} from "./common/db/prisma.service";
 
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
 export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
-    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
+    bind<ILoggerService>(TYPES.LoggerService).to(LoggerService).inSingletonScope();
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
     bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
     bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
-    bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+    //bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
     bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
     bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
@@ -28,7 +28,6 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
 function bootstrap() {
     const exampleAppContainer = new Container();
     // прокидываем все зависимости
-    exampleAppContainer.load(appContainers);
 
     const app = exampleAppContainer.get<App>(TYPES.Application);
     app.init();
