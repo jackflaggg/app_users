@@ -16,7 +16,7 @@ import {ConfigService} from "./config/config.service";
 // контейнер всех зависимостей
 // Он связывает интерфейсы с конкретными реализациями с помощью метода bind
 export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
-    bind<ILoggerService>(TYPES.LoggerService).to(LoggerService).inSingletonScope();
+    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
     bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
     bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();

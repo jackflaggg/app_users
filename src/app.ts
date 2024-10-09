@@ -21,7 +21,7 @@ export class App {
     // логгер (и другие зависимости) инжектируются,
     // чтобы обеспечить их доступность в экземпляре класса App
     constructor(
-        @inject(TYPES.LoggerService) private logger: ILoggerService,
+        @inject(TYPES.ILoggerService) private logger: ILoggerService,
         @inject(TYPES.UserController) private userController: UserController,
         @inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
         //@inject(TYPES.PrismaService) private prismaService: PrismaService,
