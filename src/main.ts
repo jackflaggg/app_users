@@ -20,7 +20,7 @@ export const appContainers = new ContainerModule((bind: interfaces.Bind) => {
     bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
     bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
     bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
-    //bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+    bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
     bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
     bind<App>(TYPES.Application).to(App).inSingletonScope();
 });

@@ -8,9 +8,7 @@ import {ILoggerService} from "./logger/logger.interface";
 import {IConfigService} from "./config/config.service.interface";
 import {IExceptionFilter} from "./errors/exception.filter.interface";
 import {UserController} from "./users/user.controller";
-import {LoggerService} from "./logger/logger.service";
 import {PrismaService} from "./common/db/prisma.service";
-import {exampleAppContainer} from "./main";
 
 @injectable()
 export class App {
@@ -45,7 +43,7 @@ export class App {
         this.useMiddleware();
         this.useRoutes();
         this.useExceptionFilters();
-        await this.prismaService.connect();
+        const db = await this.prismaService.connect();
         this.server = this.app.listen(this.port, () => {
             console.log('Server is running on port: ' + this.port)
         });
