@@ -23,8 +23,16 @@ export class UserController extends BaseController implements IUserController {
         @inject(TYPES.UserService) private userService: IUserService) {
         super(loggerService);
         this.bindRoutes([
-            { path: '/register', method: 'post', func: this.register, middlewares: [new ValidateMiddleware(UserRegisterDto)] },
-            { path: '/login', method: 'post', func: this.login, middlewares: [new ValidateMiddleware(UserLoginDto)] },
+            {
+                path: '/register',
+                method: 'post',
+                func: this.register,
+                middlewares: [new ValidateMiddleware(UserRegisterDto)] },
+            {
+                path: '/login',
+                method: 'post',
+                func: this.login,
+                middlewares: [new ValidateMiddleware(UserLoginDto)] },
         ])
     }
 
