@@ -33,7 +33,7 @@ export class App {
     }
     useRoutes() {
         // Используем роутер пользователя,
-        // инжектированный через зависимость, для обработки маршрутов на /users".
+        // инжектированный через зависимость, для обработки маршрутов на /users
         this.app.use('/users', this.userController.router)
     }
     useExceptionFilters(){

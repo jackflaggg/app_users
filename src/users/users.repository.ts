@@ -11,6 +11,7 @@ export class UsersRepository implements IUsersRepository {
     constructor(@inject(TYPES.PrismaService) private prismaService: PrismaService) {}
     async create(user: User) : Promise<UserModel>{
         const {email, password, name} = user;
+
         const createUser = await this.prismaService.client.userModel.create({
             data: {
                 email,

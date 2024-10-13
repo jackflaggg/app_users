@@ -45,7 +45,7 @@ export class UserController extends BaseController implements IUserController {
             if(!result){
                 return next(new HTTPError(422, 'Такого пользователя нет'));
             }
-            const jwt = this.signJWT(req.body.email, this.configService.get('SECRET_KEY'))
+            const jwt = await this.signJWT(req.body.email, this.configService.get('SECRET_KEY'))
             this.ok(res, { jwt })
         } catch (e: unknown){
             if (e instanceof Error) {

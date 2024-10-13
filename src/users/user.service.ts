@@ -12,11 +12,12 @@ export class UserService implements UserService {
     constructor(@inject(TYPES.ConfigService) private configService: IConfigService,
                 @inject(TYPES.UsersRepository) private usersRepository: IUsersRepository) {}
     async createUser(dto: UserRegisterDto): Promise<UserModel | null>{
+
         const user = new User(dto.email, dto.name);
         const salt = this.configService.get('SALT')
         await user.setPassword(dto.password, Number(salt));
 
-        const existingUser = await this.usersRepository.find(dto.email);
+        const existingUser = await this.usersRepository.find(dto.email)
 
         if (existingUser){
             return null;
