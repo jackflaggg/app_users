@@ -2,7 +2,7 @@ import {UserRegisterDto} from "./dto/user-register.dto";
 import {User} from "./user.entity";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../types";
+import {TYPES} from "../typess/types";
 import {IConfigService} from "../config/config.service.interface";
 import {UserModel} from "@prisma/client";
 import {IUsersRepository} from "./users.repository.interface";

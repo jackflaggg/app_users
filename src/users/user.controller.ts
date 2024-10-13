@@ -3,7 +3,7 @@ import {Request, Response, NextFunction} from "express";
 import {HTTPError} from "../errors/http-error.class";
 import {ILoggerService} from "../logger/logger.interface";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../types";
+import {TYPES} from "../typess/types";
 import 'reflect-metadata'
 import {IUserController} from "./user.interface";
 import {UserLoginDto} from "./dto/user-login.dto";

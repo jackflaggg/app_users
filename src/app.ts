@@ -1,7 +1,7 @@
 import express, {Express} from 'express'
 import {Server} from "http";
 import {inject, injectable} from "inversify";
-import {TYPES} from "./types";
+import {TYPES} from "./typess/types";
 import { json } from "body-parser"
 import 'reflect-metadata'
 import {ILoggerService} from "./logger/logger.interface";

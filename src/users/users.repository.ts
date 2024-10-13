@@ -1,7 +1,7 @@
 import {IUsersRepository} from "./users.repository.interface";
 import {User} from "./user.entity";
 import {UserModel} from "@prisma/client";
-import {TYPES} from "../types";
+import {TYPES} from "../typess/types";
 import {inject, injectable} from "inversify";
 import {PrismaService} from "../common/db/prisma.service";
 import {userModelMapper} from "../mapper/userModel.mapper";

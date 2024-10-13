@@ -4,7 +4,7 @@ import {UserController} from "./users/user.controller";
 import {ExceptionFilter} from "./errors/exception.filter";
 import { Container, ContainerModule, interfaces } from "inversify"
 import {ILoggerService} from "./logger/logger.interface";
-import {TYPES} from "./types";
+import {TYPES} from "./typess/types";
 import {IExceptionFilter} from "./errors/exception.filter.interface";
 import {UserService} from "./users/user.service";
 import {IUserService} from "./users/user.service.interface";
