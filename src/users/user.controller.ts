@@ -12,7 +12,6 @@ import {User} from "./user.entity";
 import {IUserService} from "./user.service.interface";
 import {ValidateMiddleware} from "../common/validate.middleware";
 import {sign} from "jsonwebtoken"
-import {Settings} from "../settings";
 import {IConfigService} from "../config/config.service.interface";
 
 @injectable()
@@ -47,7 +46,7 @@ export class UserController extends BaseController implements IUserController {
                 return next(new HTTPError(422, 'Такого пользователя нет'));
             }
             const jwt = this.signJWT(req.body.email, this.configService.get('SECRET_KEY'))
-            this.ok(res, { resultBoolean: result })
+            this.ok(res, { jwt })
         } catch (e: unknown){
             if (e instanceof Error) {
                 console.error(e);
