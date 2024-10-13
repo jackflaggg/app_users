@@ -11,7 +11,7 @@ export class AuthMiddleware implements IMiddleware {
             try {
                 const [, jwt] = authHeaders.split(' ');
                 const payload = await this.jwtVerify(jwt, this.secret);
-                req.user = String(payload.email);
+                req.user = payload.email;
                 next()
             } catch (e: unknown){
                 next()
