@@ -11,6 +11,7 @@ import {UserRegisterDto} from "./dto/user-register.dto";
 import {User} from "./user.entity";
 import {IUserService} from "./user.service.interface";
 import {ValidateMiddleware} from "../common/validate.middleware";
+import {sign} from "jsonwebtoken"
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -66,4 +67,19 @@ export class UserController extends BaseController implements IUserController {
         }
     }
 
+    private signJWT(payload: string, secret: string): Promise<string>{
+        return new Promise<string>((resolve, reject) => {
+            sign({
+                payload,
+                iat: Math.floor(Date.now()/1000)
+            },
+                secret,
+                {
+                    algorithm: 'HS256',
+                }, (err, token) => {
+                if (err) return reject(err);
+                resolve(String(token));
+                })
+        });
+    }
 }
