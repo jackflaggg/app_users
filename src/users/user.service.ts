@@ -6,9 +6,10 @@ import {TYPES} from "../typess/types";
 import {IConfigService} from "../config/config.service.interface";
 import {UserModel} from "@prisma/client";
 import {IUsersRepository} from "./users.repository.interface";
+import {IUserService} from "./user.service.interface";
 
 @injectable()
-export class UserService implements UserService {
+export class UserService implements IUserService {
     constructor(@inject(TYPES.ConfigService) private configService: IConfigService,
                 @inject(TYPES.UsersRepository) private usersRepository: IUsersRepository) {}
     async createUser(dto: UserRegisterDto): Promise<UserModel | null>{
